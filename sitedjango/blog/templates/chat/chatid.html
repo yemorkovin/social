@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+{% block title %}Чат{% endblock %}
+{% block content %}
+<h2>Чат</h2>
+<div class="chat_content">
+    <div class="chat_list" id="cont_chat">
+        {% for chat in chats %}
+            <div class="chat_mesaage_item">
+                <p>{{chat.user.login}} {{chat.date}}</p>
+                <p>{{chat.message}}</p>
+                {% if user == chat.user.login %}
+                <p><a onclick="deleteitemmessage({{chat.id}})">Удалить</a></p>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+    <form method="post">
+        {% csrf_token %}
+        <p>
+            <textarea cols="40" rows="4" name="message"></textarea>
+        </p>
+        <p>
+            <button>Отправить</button>
+        </p>
+    </form>
+</div>
+<script src="/static/js/jquery-3.7.1.min.js"></script>
+<script>
+let block = document.getElementById('cont_chat');
+block.scrollTop = block.scrollHeight;
+
+function ajaxrequest(){
+        let data = '{"friend": {{friend}}}';
+        let token = $("[name=csrfmiddlewaretoken]").val();
+        $.ajax({
+            type: 'POST',
+            url: '/ajaxchat/',
+            contentType: 'application/json;charset=utf-8',
+            dataType: 'json',
+            data: data,
+            headers: {
+                'X-CSRFToken': token
+            },
+            success: function(response){
+                console.log(response);
+                $('#cont_chat').html(response['data']);
+            }
+        });
+}
+    setInterval(ajaxrequest, 1000);
+
+    function deleteitemmessage(id){
+        let conf = confirm('Вы точно хотите удалить сообщение!');
+        if(conf){
+            let data = '{"id": '+id+'}';
+            let token = $("[name=csrfmiddlewaretoken]").val();
+            $.ajax({
+                type: 'POST',
+                url: '/ajaxdelete/',
+                contentType: 'application/json;charset=utf-8',
+                dataType: 'json',
+                data: data,
+                headers: {
+                    'X-CSRFToken': token
+                },
+                success: function(response){
+                    if(response['data'] == 1){
+                        alert('Ваше сообщение успешно удалено!');
+                    }else{
+                        alert('Возникла ошибка при удалении!');
+                    }
+                }
+            });
+        }
+
+    }
+</script>
+{% endblock %}

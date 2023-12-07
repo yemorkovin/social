@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block title %}Контакты{% endblock %}
+{% block content %}
+<h2>Контакты</h2>
+<ul>
+    {% for contact in contacts %}
+        <li>
+            <a href="{{contact.link}}">
+                {{contact.title}}
+            </a>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

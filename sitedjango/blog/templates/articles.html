@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+{% block title %}Список статей{% endblock %}
+{% block content %}
+<h2 align="center">Статьи</h2>
+<form method="post" align="center">
+    {% csrf_token %}
+    {{form}}<button>Поиск</button>
+</form>
+<ul class="content_article">
+    {% for article in articles %}
+        <li >
+            <div>
+                <h2>{{article.title}}</h2>
+                <p><img src="/{{article.img}}" width="300px"></p>
+                <p>{{article.description}}</p>
+                <p>{{article.category}}</p>
+                <p><b>{{article.user}}</b>
+                <p>{{article.date}}</p>
+                <p><a href="/article/{{article.id}}">Подробнее</a></p>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

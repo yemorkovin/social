@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+{% block title %}{{article.title}}{% endblock %}
+{% block content %}
+<h2 align="center">{{article.title}}</h2>
+<p><img src="/{{images}}"></p>
+{{article.fulltext}}
+
+
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{article.id}}">
+    <div class="formitem">
+        <div>Имя:</div>
+        <div>
+            <input type="text" name="name">
+        </div>
+    </div>
+    <div class="formitem">
+        <div>Комментарий:</div>
+        <div>
+            <textarea name="comment"></textarea>
+        </div>
+    </div>
+
+    <div class="btn_add">
+        <input type="submit" value="Добавить комментарий">
+    </div>
+</form>
+{% endblock %}

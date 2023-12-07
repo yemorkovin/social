@@ -1,0 +1,82 @@
+.menu li{
+    display: inline-block;
+    padding: 10px;
+}
+.menu{
+    text-align: center
+}
+.menu li a{
+    padding: 10px;
+    border: 1px solid #eee;
+}
+.content_article{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+.content_article li{
+    margin: 10px;
+}
+.formitem{
+    display: flex;
+    width: 250px;
+    margin: 20px auto;
+}
+.formitem div{
+    width: 50%
+}
+.btn_add{
+    width: 250px;
+    margin: 20px auto;
+}
+.form_reg{
+    list-style-type: none;
+    width: 700px;
+    margin: 10px auto;
+}
+.form_reg li{
+    display: flex;
+    margin: 10px
+}
+.form_reg li label{
+    display: block;
+    width: 50%
+}
+h2{
+    text-align: center;
+    margin: 32px
+}
+.user_panel{
+    display: flex;
+    width: 600px;
+    margin: 10px auto;
+}
+.user_panel div:last-child{
+    margin: 15px
+}
+.btn{
+    padding: 5px 8px;
+    background: #4682B4;
+    color: #fff;
+    border-radius: 5px;
+    border: none
+}
+.chat_content{
+    width: 600px;
+    margin: 20px auto;
+}
+.chat_mesaage_item{
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 4px;
+    padding: 10px
+}
+.chat_mesaage_item p:first-child{
+    font-weight: bold;
+    font-size: 12px;
+
+}
+.chat_list{
+    overflow-y: scroll;
+    height: 300px
+}

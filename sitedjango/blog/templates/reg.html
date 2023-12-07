@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% block title %}Регистрация{% endblock %}
+{% block content %}
+<h2>Регистрация</h2>
+{% if not errors == '' %}
+<p align="center" style="color: red">{{errors}}</p>
+{% endif %}
+{% if not suc == '' %}
+<p align="center" style="color: green">{{suc}}</p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <ul class="form_reg">
+        <li>
+            <label>Имя: </label>
+            <input type="text" name="name" placeholder="Ваше имя"  required>
+        </li>
+         <li>
+            <label>login: </label>
+            <input type="text" name="login" required>
+        </li>
+         <li>
+            <label>Email: </label>
+            <input type="email" name="email" required>
+        </li>
+         <li>
+            <label>Password: </label>
+            <input type="password" name="password" required>
+        </li>
+         <li>
+            <label>Password repeat: </label>
+            <input type="password" name="password_repeat" required>
+        </li>
+         <li>
+             <input type="checkbox" name="check" value="ok" id="check" required> <label for="check">Согласиться с условиями регистрации</label>
+        </li>
+         <li>
+            <input type="submit" value="Регистрация">
+        </li>
+    </ul>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+{% block title %}Список пользователей{% endblock %}
+{% block content %}
+<div class="user_panel">
+    <div>
+        <p><img src="/static/user/default.png" width="300px"></p>
+        <p>
+        {% if s %}
+        <p>Вы в друзьях</p>
+        {% else %}
+            <form action="/addfriend/" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="id_friend" value="{{user.id}}">
+                <button class="btn">Добавить в друзья</button>
+            </form>
+        {% endif %}
+        </p>
+         <p>
+            <form action="/chat/{{user.id}}">
+                 <button class="btn">Написать сообщение</button>
+            </form>
+
+         </p>
+    </div>
+    <div>
+        <p><b>Name:</b> {{user.name}}</p>
+        <p><b>Login:</b> {{user.login}}</p>
+        <p><b>Email:</b> {{user.email}}</p>
+    </div>
+</div>
+{% endblock %}

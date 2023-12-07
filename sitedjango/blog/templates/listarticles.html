@@ -1,0 +1,9 @@
+{% extends 'main.html' %}
+{% block title %}Личная панель{% endblock %}
+{% block content %}
+<ul>
+{% for article in articles %}
+    <li><a href="/article/{{article.id}}">{{article.title}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}
