@@ -80,3 +80,7 @@ h2{
     overflow-y: scroll;
     height: 300px
 }
+.users_list{
+    width: 700px;
+    margin: 20px auto;
+}

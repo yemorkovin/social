@@ -1,9 +1,17 @@
 {% extends 'main.html' %}
 {% block title %}Список пользователей{% endblock %}
 {% block content %}
-<ul>
+<ul class="users_list">
+    <select>
+        {% for i in s %}
+            <option>{{i}}</option>
+        {% endfor %}
+        <button>Отправить</button>
+    </select>
 {% for user in users %}
+    {% if not current_user == user %}
     <li><a href="/user/{{user.login}}">{{user.login}}</a></li>
+    {% endif %}
 {% endfor %}
 </ul>
 {% endblock %}

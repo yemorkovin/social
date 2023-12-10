@@ -11,6 +11,9 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
+from itertools import  groupby
+from collections import Counter
+
 def contact(request):
     if request.method == 'POST':
         pass #если форма отправлена, то есть пользователь нажал на кнопку Отправить
@@ -96,6 +99,7 @@ def reg(request):
         name = request.POST['name']
         login = request.POST['login']
         email = request.POST['email']
+        city = request.POST['city']
         password = request.POST['password']
         password_repeat = request.POST['password_repeat']
         if (password_repeat == password) and (not User.objects.filter(login=login).exists()):
@@ -103,6 +107,7 @@ def reg(request):
             user.name = name
             user.login = login
             user.email = email
+            user.city = city
             user.password = password
             user.save()
             suc = 'Вы успешно зарегистрированы!'
@@ -217,8 +222,18 @@ def send_notification(user, link_article):
 
 #ajax
 def users(request):
+    filter_city = User.objects.values('city').annotate()
+    s = []
+    c1 = filter_city[0]['city']
+    s.append(c1)
+    for i in filter_city:
+        if not i['city'] == c1:
+            s.append(i['city'])
+            c1 = i['city']
+
+    current_user = get_object_or_404(User, login=request.session['login'])
     users = User.objects.all()
-    return render(request, 'user/users.html', context={'users': users})
+    return render(request, 'user/users.html', context={'users': users, 'current_user': current_user, 's': s})
 
 def userdetail(request, login):
 

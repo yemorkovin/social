@@ -1,4 +1,6 @@
 from django.db import models
+from django.shortcuts import get_object_or_404
+
 
 # Create your models here.
 class Contact(models.Model):
@@ -13,10 +15,15 @@ class Category(models.Model):
     def __str__(self):
         return self.title
 
+'''class City(models.Model):
+    title = models.CharField(verbose_name='Город', max_length=200)
+    def __str__(self):
+        return self.title'''
 
 class User(models.Model):
     name = models.CharField(max_length=200, verbose_name='Имя')
     login = models.CharField(max_length=200, verbose_name='Login')
+    city = models.CharField(verbose_name='Город', default='Москва', max_length=200)
     email = models.CharField(max_length=200, verbose_name='Email')
     password = models.CharField(max_length=200, verbose_name='Password')
 
